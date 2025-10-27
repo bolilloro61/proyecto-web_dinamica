@@ -1,0 +1,238 @@
+body, .main-bg {
+  background: #f6f6f6 url('../src/talavera.jpg') no-repeat center top;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.section-box {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.buscador-custom .form-select,
+.buscador-custom .form-control {
+  border-radius: 9px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.clima-box {
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  width: 90px;
+  padding: 10px 0;
+  margin-left: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ========== Carrusel con tarjetas tipo Booking ========== */
+#carousel-content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1150px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0;
+}
+
+.carousel-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 18px 0 rgba(60, 60, 80, 0.10);
+  background: #fff;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  width: 200px;  /* Tamaño fijo para todas */
+  height: 220px; /* Alto fijo para todas */
+  margin: 0 12px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.carousel-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(60, 60, 80, 0.18);
+  transform: translateY(-4px);
+}
+
+.carousel-card-img {
+  object-fit: cover;
+  width: 100%;
+  height: 120px;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.carousel-card-body {
+  padding: 14px 12px 10px 14px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.carousel-card-title {
+  margin-bottom: 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  color: #263238;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.carousel-card-detail {
+  font-size: 0.9rem;
+  color: #7b868c;
+  text-align: left;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Botones del carrusel - estilo Talavera azulito */
+.position-relative .carousel-control-prev,
+.position-relative .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 45px;
+  height: 45px;
+  background: #4A90E2; /* Azul tipo Talavera */
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  opacity: 0.92;
+  transition: all 0.2s ease;
+}
+
+.position-relative .carousel-control-prev {
+  left: 5px;  /* Más cerca del carrusel */
+}
+
+.position-relative .carousel-control-next {
+  right: 5px; /* Más cerca del carrusel */
+}
+
+.position-relative .carousel-control-prev:hover,
+.position-relative .carousel-control-next:hover {
+  background: #3A7BC8;
+  opacity: 1;
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: brightness(0) invert(1); /* Íconos blancos */
+}
+/* Ocultar botones por defecto hasta que haya contenido */
+.position-relative .carousel-control-prev,
+.position-relative .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 45px;
+  height: 45px;
+  background: #4A90E2;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
+  display: none; /* Ocultas por defecto */
+  align-items: center;
+  justify-content: center;
+  border: none;
+  opacity: 0.92;
+  transition: all 0.2s ease;
+}
+
+/* Mostrar cuando están activas (no deshabilitadas) */
+.position-relative .carousel-control-prev:not(:disabled),
+.position-relative .carousel-control-next:not(:disabled) {
+  display: flex;
+}
+
+.position-relative .carousel-control-prev {
+  left: 5px;
+}
+
+.position-relative .carousel-control-next {
+  right: 5px;
+}
+
+.position-relative .carousel-control-prev:hover:not(:disabled),
+.position-relative .carousel-control-next:hover:not(:disabled) {
+  background: #3A7BC8;
+  opacity: 1;
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: brightness(0) invert(1);
+}
+
+
+/* Responsivos */
+@media (max-width: 1024px) {
+  .carousel-card {
+    width: 180px;
+    height: 210px;
+    margin: 0 10px 8px 10px;
+  }
+  .carousel-card-img {
+    height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-box {
+    padding: 0.75rem;
+  }
+  .clima-box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .carousel-card {
+    width: 160px;
+    height: 200px;
+    margin: 0 8px 8px 8px;
+  }
+  .carousel-card-img {
+    height: 90px;
+  }
+  .carousel-card-title {
+    font-size: 0.95rem;
+  }
+  .carousel-card-detail {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-card {
+    width: 140px;
+    height: 180px;
+  }
+  .carousel-card-img {
+    height: 80px;
+  }
+}
+
+
