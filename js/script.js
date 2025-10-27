@@ -1,3 +1,4 @@
+
 const APIcountries_name = "https://restcountries.com/v3.1/all?fields=name";
 const APIcountries_capital = "https://restcountries.com/v3.1/all?fields=capital,capitalInfo";
 const APIcountries_latlng = "https://restcountries.com/v3.1/all?fields=latlng";
@@ -17,7 +18,6 @@ const buttonNext = document.getElementById("cardsNext");
 // Ocultar botones al inicio
 buttonPrev.disabled = true;
 buttonNext.disabled = true;
-
 
 let countriesName = [];
 let countriesCapital = [];
@@ -46,9 +46,15 @@ function renderCards(idx) {
     const imgSrc = placeholderImg;
     const title = props.name || "Sin nombre";
     const city = props.city || props.address_line2 || "";
+    const desc = props.formatted || "Sin descripción disponible.";
+
     return `
       <div class="col-auto d-flex" style="padding-left:0;padding-right:0;">
-        <div class="carousel-card">
+        <div class="carousel-card" 
+             data-title="${title}" 
+             data-city="${city}" 
+             data-img="${imgSrc}" 
+             data-desc="${desc}">
           <img src="${imgSrc}" class="carousel-card-img" alt="${title}">
           <div class="carousel-card-body">
             <div class="carousel-card-title">${title}</div>
@@ -59,9 +65,31 @@ function renderCards(idx) {
     `;
   }).join('');
 
+  // Activar/Desactivar botones
   buttonPrev.disabled = (startIdx === 0);
   buttonNext.disabled = (startIdx + maxCards >= allPlaces.length);
-  
+
+  // --------- Eventos para abrir modal al hacer clic ---------
+  document.querySelectorAll(".carousel-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.dataset.title;
+      const city = card.dataset.city;
+      const img = card.dataset.img;
+      const desc = card.dataset.desc;
+
+      // Actualizar contenido del modal
+      document.getElementById("placeTitle").textContent = title;
+      document.getElementById("placeImage").src = img;
+      document.getElementById("placeInfo").innerHTML = `
+        <strong>Ubicación:</strong> ${city || "No disponible"}<br>
+        <strong>Descripción:</strong> ${desc}
+      `;
+
+      // Mostrar modal
+      const modal = new bootstrap.Modal(document.getElementById("placeModal"));
+      modal.show();
+    });
+  });
 }
 
 // --------- Selector de países ordenado ---------
@@ -184,3 +212,6 @@ buttonPrev.addEventListener('click', () => {
     renderCards(startIdx);
   }
 });
+
+
+
