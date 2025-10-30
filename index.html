@@ -6,42 +6,32 @@
     <title>Destino Explorer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <style>
-      #carousel-content {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 1000px;
-      }
-      .card {
-        min-width: 180px;
-        max-width: 220px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .position-relative .carousel-control-prev,
-      .position-relative .carousel-control-next {
-        top: 45%;
-        transform: translateY(-50%);
-        z-index: 2;
-      }
-    </style>
   </head>
   <body>
     <div class="main-bg">
       <div class="container-fluid py-3">
         <!-- Clima -->
         <div class="row align-items-center mb-2">
-          <div class="col-auto clima-box text-center">
+         <div class="col-auto clima-box text-center">
+            <div id="weather-location" class="fw-semibold mt-1"></div> 
             <div id="weather-icon"></div>
             <div id="weather-temp" class="fs-3 fw-bold"></div>
             <div id="weather-desc"></div>
-          </div>
+        </div>
+
           <!-- Buscador -->
           <div class="col">
             <div class="input-group buscador-custom">
-              <select id="countries" class="form-select form-select-lg" aria-label="¿A dónde vas?"></select>
-              <input type="text" class="form-control form-control-lg" placeholder="Fecha de llegada/salida" id="date-input">
-              <input type="text" class="form-control form-control-lg" placeholder="Personas" id="people-input">
+               <span class="input-group-text buscador-icon">
+               <span class="icon-bg"><img src="src/mapa-icono.svg" alt="País" width="20"></span>
+              </span>
+              <select id="countries" class="form-select form-select-lg"></select>
+              <span class="input-group-text buscador-icon">
+              <span class="icon-bg"><img src="src/calendar-icono.svg" alt="Fecha" width="20"></span>
+              </span>
+              <input type="date" class="form-control form-control-lg" placeholder="Fecha" id="date-input" />
+              </div>
+
             </div>
           </div>
         </div>
@@ -82,29 +72,42 @@
         </div>
 
 
-        <!-- Destinos de Moda y Horóscopo -->
+        <!-- noticias y Horóscopo -->
         <div class="row mt-4">
-          <!-- Destinos de Moda -->
           <div class="col-md-8">
-            <div class="section-box mb-3">
-              <h6 class="fw-bold mb-2">Destinos de moda</h6>
-              <div class="row" id="trendy-destinations">
-                <!-- Aquí se agregan dinámicamente los destinos -->
-              </div>
-            </div>
-          </div>
-          <!-- Horóscopo -->
-          <div class="col-md-4">
-            <div class="section-box mb-3 p-3">
-              <div class="d-flex align-items-center mb-2">
-                <img src="virgo.svg" alt="Virgo" class="me-2" width="36">
-                <span class="fw-bold fs-5"></span>
-              </div>
-              <div id="horoscope-text">
-                <!-- Horóscopo dinámico -->
-              </div>
-            </div>
-          </div>
+  <div class="section-box mb-3">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <h6 class="fw-bold mb-0">Breaking News</h6>
+      <div>
+        <button class="btn btn-outline-primary btn-sm" id="newsPrev" type="button">◀</button>
+        <button class="btn btn-outline-primary btn-sm" id="newsNext" type="button">▶</button>
+      </div>
+    </div>
+    <div id="news-carousel-inner">
+      <!-- Aquí se insertan las noticias -->
+    </div>
+  </div>
+</div>
+
+        <!-- Horóscopo (nuevo carrusel) -->
+<div class="col-md-4">
+  <div class="section-box mb-3 p-3">
+    <h6 class="fw-bold mb-2">Daily Horoscope</h6>
+    <div class="position-relative" id="horoscope-carousel">
+      <button class="carousel-control-prev" id="horoscopePrev" type="button">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <div class="row flex-nowrap overflow-hidden justify-content-center align-items-center" id="horoscope-cards">
+        <!-- Aquí se insertan los signos dinámicamente -->
+      </div>
+      <button class="carousel-control-next" id="horoscopeNext" type="button">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
         </div>
       </div>
     </div>
