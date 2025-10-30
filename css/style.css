@@ -5,31 +5,65 @@ body, .main-bg {
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-.section-box {
-  background: #fff;
+.section-box, .clima-box, .modal-content {
+  background: rgba(255,255,255,0.85) !important;
   border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 10px rgba(60,90,160,0.07);
   padding: 1rem;
   margin-bottom: 1rem;
 }
 
+.input-group.buscador-custom {
+  background: rgba(255,255,255,0.72);
+  border-radius: 10px;
+  box-shadow: 0 2px 7px rgba(30,80,200,0.06);
+  padding: 5px;
+  min-width: 200px;
+}
+
+.buscador-icon {
+  background: transparent;
+  border: none;
+  padding: 0 2px;
+}
+
+.icon-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1976D2;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-bg img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
 .buscador-custom .form-select,
 .buscador-custom .form-control {
-  border-radius: 9px;
-  margin-left: 4px;
-  margin-right: 4px;
+  border-radius: 7px !important;
+  margin: 0 3px;
+  height: 36px;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  background: rgba(255,255,255,0.65) !important;
+  box-shadow: none;
+  border: 1px solid #E3EAF4;
 }
 
 .clima-box {
-  background: rgba(255,255,255,0.85);
-  border-radius: 16px;
-  width: 90px;
-  padding: 10px 0;
+  width: 180px;
+  padding: 10px 10px;
   margin-left: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  text-align: center;
+  font-size: 0.9rem;
 }
 
-/* ========== Carrusel con tarjetas tipo Booking ========== */
 #carousel-content {
   margin-left: auto;
   margin-right: auto;
@@ -45,8 +79,8 @@ body, .main-bg {
   box-shadow: 0 4px 18px 0 rgba(60, 60, 80, 0.10);
   background: #fff;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
-  width: 200px;  /* Tamaño fijo para todas */
-  height: 220px; /* Alto fijo para todas */
+  width: 200px;
+  height: 220px;
   margin: 0 12px 8px 12px;
   display: flex;
   flex-direction: column;
@@ -100,47 +134,7 @@ body, .main-bg {
   white-space: nowrap;
 }
 
-/* Botones del carrusel - estilo Talavera azulito */
-.position-relative .carousel-control-prev,
-.position-relative .carousel-control-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 45px;
-  height: 45px;
-  background: #4A90E2; /* Azul tipo Talavera */
-  border-radius: 50%;
-  box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  opacity: 0.92;
-  transition: all 0.2s ease;
-}
-
-.position-relative .carousel-control-prev {
-  left: 5px;  /* Más cerca del carrusel */
-}
-
-.position-relative .carousel-control-next {
-  right: 5px; /* Más cerca del carrusel */
-}
-
-.position-relative .carousel-control-prev:hover,
-.position-relative .carousel-control-next:hover {
-  background: #3A7BC8;
-  opacity: 1;
-  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: brightness(0) invert(1); /* Íconos blancos */
-}
-/* Ocultar botones por defecto hasta que haya contenido */
+/* Botones del carrusel estilo Talavera azulito y responsive */
 .position-relative .carousel-control-prev,
 .position-relative .carousel-control-next {
   position: absolute;
@@ -152,7 +146,7 @@ body, .main-bg {
   background: #4A90E2;
   border-radius: 50%;
   box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
-  display: none; /* Ocultas por defecto */
+  display: none;
   align-items: center;
   justify-content: center;
   border: none;
@@ -160,7 +154,6 @@ body, .main-bg {
   transition: all 0.2s ease;
 }
 
-/* Mostrar cuando están activas (no deshabilitadas) */
 .position-relative .carousel-control-prev:not(:disabled),
 .position-relative .carousel-control-next:not(:disabled) {
   display: flex;
@@ -187,14 +180,13 @@ body, .main-bg {
   filter: brightness(0) invert(1);
 }
 
-
-/* Responsivos */
 @media (max-width: 1024px) {
   .carousel-card {
     width: 180px;
     height: 210px;
     margin: 0 10px 8px 10px;
   }
+
   .carousel-card-img {
     height: 100px;
   }
@@ -204,24 +196,40 @@ body, .main-bg {
   .section-box {
     padding: 0.75rem;
   }
+
   .clima-box {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
   }
+
   .carousel-card {
     width: 160px;
     height: 200px;
     margin: 0 8px 8px 8px;
   }
+
   .carousel-card-img {
     height: 90px;
   }
+
   .carousel-card-title {
     font-size: 0.95rem;
   }
+
   .carousel-card-detail {
     font-size: 0.85rem;
+  }
+
+  .input-group.buscador-custom {
+    flex-direction: column;
+    min-width: 160px;
+  }
+
+  .buscador-custom .form-select,
+  .buscador-custom .form-control {
+    width: 100%;
+    margin: 4px 0;
   }
 }
 
@@ -230,9 +238,8 @@ body, .main-bg {
     width: 140px;
     height: 180px;
   }
+
   .carousel-card-img {
     height: 80px;
   }
 }
-
-

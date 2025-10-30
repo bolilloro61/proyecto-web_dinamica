@@ -8,16 +8,18 @@ const mainCountry = document.getElementById("main-country");
 const weatherIcon = document.getElementById("weather-icon");
 const weatherTemp = document.getElementById("weather-temp");
 const weatherDesc = document.getElementById("weather-desc");
+const weatherLocation = document.getElementById("weather-location");
 const horoscopeText = document.getElementById("horoscope-text");
 const horoscopeSignImg = document.querySelector(".col-md-4 img");
 const horoscopeSignName = document.querySelector(".col-md-4 span");
 
 const buttonPrev = document.getElementById("cardsPrev");
 const buttonNext = document.getElementById("cardsNext");
+
+const dateInput = document.getElementById("date-input");
 // Ocultar botones al inicio
 buttonPrev.disabled = true;
 buttonNext.disabled = true;
-
 
 let countriesName = [];
 let countriesCapital = [];
@@ -31,7 +33,16 @@ let allPlaces = [];
 let startIdx = 0;
 const maxCards = 5;
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80";
-
+dateInput.addEventListener("change", function() {
+  const value = this.value; // formato: YYYY-MM-DD
+  if (value) {
+    const [year, month, day] = value.split("-");
+    const fechaFormateada = `${day}/${month}/${year}`;
+    console.log("Fecha (DD/MM/YYYY):", fechaFormateada);
+    // Aquí puedes llamar a tu función de filtro con esa fecha
+    // filtrarPorFecha(fechaFormateada);
+  }
+});
 // --------- Renderizado de tarjetas tipo Booking ---------
 function renderCards(idx) {
   const end = Math.min(idx + maxCards, allPlaces.length);
@@ -46,9 +57,15 @@ function renderCards(idx) {
     const imgSrc = placeholderImg;
     const title = props.name || "Sin nombre";
     const city = props.city || props.address_line2 || "";
+    const desc = props.formatted || "Sin descripción disponible.";
+
     return `
       <div class="col-auto d-flex" style="padding-left:0;padding-right:0;">
-        <div class="carousel-card">
+        <div class="carousel-card" 
+             data-title="${title}" 
+             data-city="${city}" 
+             data-img="${imgSrc}" 
+             data-desc="${desc}">
           <img src="${imgSrc}" class="carousel-card-img" alt="${title}">
           <div class="carousel-card-body">
             <div class="carousel-card-title">${title}</div>
@@ -59,9 +76,31 @@ function renderCards(idx) {
     `;
   }).join('');
 
+  // Activar/Desactivar botones
   buttonPrev.disabled = (startIdx === 0);
   buttonNext.disabled = (startIdx + maxCards >= allPlaces.length);
-  
+
+  // --------- Eventos para abrir modal al hacer clic ---------
+  document.querySelectorAll(".carousel-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.dataset.title;
+      const city = card.dataset.city;
+      const img = card.dataset.img;
+      const desc = card.dataset.desc;
+
+      // Actualizar contenido del modal
+      document.getElementById("placeTitle").textContent = title;
+      document.getElementById("placeImage").src = img;
+      document.getElementById("placeInfo").innerHTML = `
+        <strong>Ubicación:</strong> ${city || "No disponible"}<br>
+        <strong>Descripción:</strong> ${desc}
+      `;
+
+      // Mostrar modal
+      const modal = new bootstrap.Modal(document.getElementById("placeModal"));
+      modal.show();
+    });
+  });
 }
 
 // --------- Selector de países ordenado ---------
@@ -143,26 +182,31 @@ countriesSelect.addEventListener('change', async () => {
     allPlaces = [];
     renderCards(0);
   }
-
-  // Clima
+//clima
   try {
-    const weatherResp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${openWeatherApiKey}`);
-    const weatherData = await weatherResp.json();
+  const weatherResp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${openWeatherApiKey}`);
+  const weatherData = await weatherResp.json();
 
-    if (weatherData.weather && weatherData.weather.length > 0) {
-      weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°`;
-      weatherDesc.textContent = weatherData.weather[0].description;
-      weatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png" alt="Weather icon">`;
-    } else {
-      weatherTemp.textContent = "";
-      weatherDesc.textContent = "";
-      weatherIcon.innerHTML = "";
-    }
-  } catch {
+  if (weatherData.weather && weatherData.weather.length > 0) {
+    weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°`;
+    weatherDesc.textContent = weatherData.weather[0].description;
+     weatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png" alt="Weather icon">`;
+ 
+    // Añade nombre del lugar
+    weatherLocation.textContent = weatherData.name || "";
+  } else {
     weatherTemp.textContent = "";
     weatherDesc.textContent = "";
     weatherIcon.innerHTML = "";
+    weatherLocation.textContent = "";
   }
+} catch {
+  weatherTemp.textContent = "";
+  weatherDesc.textContent = "";
+  weatherIcon.innerHTML = "";
+  weatherLocation.textContent = "";
+}
+
 
   // Horóscopo ejemplo
   horoscopeSignImg.src = "virgo.svg";
