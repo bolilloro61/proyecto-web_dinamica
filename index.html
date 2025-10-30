@@ -74,27 +74,40 @@
 
         <!-- noticias y Horóscopo -->
         <div class="row mt-4">
-          <!-- noticias-->
           <div class="col-md-8">
-            <div class="section-box mb-3">
-              <h6 class="fw-bold mb-2">Breaking News</h6>
-              <div class="row" id="breakin-news">
-                <!-- Aquí se agregan dinámicamente los destinos -->
-              </div>
-            </div>
-          </div>
-          <!-- Horóscopo -->
-          <div class="col-md-4">
-            <div class="section-box mb-3 p-3">
-              <div class="d-flex align-items-center mb-2">
-                <img src="virgo.svg" alt="Virgo" class="me-2" width="36">
-                <span class="fw-bold fs-5"></span>
-              </div>
-              <div id="horoscope-text">
-                <!-- Horóscopo dinámico -->
-              </div>
-            </div>
-          </div>
+  <div class="section-box mb-3">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <h6 class="fw-bold mb-0">Breaking News</h6>
+      <div>
+        <button class="btn btn-outline-primary btn-sm" id="newsPrev" type="button">◀</button>
+        <button class="btn btn-outline-primary btn-sm" id="newsNext" type="button">▶</button>
+      </div>
+    </div>
+    <div id="news-carousel-inner">
+      <!-- Aquí se insertan las noticias -->
+    </div>
+  </div>
+</div>
+
+        <!-- Horóscopo (nuevo carrusel) -->
+<div class="col-md-4">
+  <div class="section-box mb-3 p-3">
+    <h6 class="fw-bold mb-2">Daily Horoscope</h6>
+    <div class="position-relative" id="horoscope-carousel">
+      <button class="carousel-control-prev" id="horoscopePrev" type="button">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <div class="row flex-nowrap overflow-hidden justify-content-center align-items-center" id="horoscope-cards">
+        <!-- Aquí se insertan los signos dinámicamente -->
+      </div>
+      <button class="carousel-control-next" id="horoscopeNext" type="button">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
         </div>
       </div>
     </div>
