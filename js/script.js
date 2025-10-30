@@ -1,3 +1,4 @@
+
 const APIcountries_name = "https://restcountries.com/v3.1/all?fields=name";
 const APIcountries_capital = "https://restcountries.com/v3.1/all?fields=capital,capitalInfo";
 const APIcountries_latlng = "https://restcountries.com/v3.1/all?fields=latlng";
@@ -228,3 +229,6 @@ buttonPrev.addEventListener('click', () => {
     renderCards(startIdx);
   }
 });
+
+
+
